@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slideshow Ulang Tahun</title>
+<style>
+    body {
+        margin: 0;
+        background: black;
+        overflow: hidden;
+    }
+    .slideshow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .slideshow img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+    .slideshow img.active {
+        opacity: 1;
+    }
+    .heart {
+        position: fixed;
+        color: red;
+        font-size: 24px;
+        animation: floatUp 5s linear forwards;
+        pointer-events: none;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-800px) scale(2); opacity: 0; }
+    }
+</style>
+</head>
+<body>
+<div class="slideshow">
+    <img src="https://i.postimg.cc/4xzc9Tny/IMG-20240710-WA0001.jpg" class="active">
+    <img src="https://i.postimg.cc/d0wyRSTB/IMG-20241028-WA0010.jpg">
+    <img src="https://i.postimg.cc/X7Bdn5bw/IMG-20241113-WA0052.jpg">
+    <img src="https://i.postimg.cc/g0s6gqVP/IMG-20250216-204315-389.webp">
+    <img src="https://i.postimg.cc/2Spvy5kg/IMG-20250216-204349-929.webp">
+    <img src="https://i.postimg.cc/59R8c3Z4/IMG-20250420-121239.jpg">
+</div>
+<audio autoplay loop>
+    <source src="Selamat Ulang Tahun [Jamrud].mp3" type="audio/mpeg">
+</audio>
+<script>
+    let slides = document.querySelectorAll('.slideshow img');
+    let index = 0;
+    setInterval(() => {
+        slides[index].classList.remove('active');
+        index = (index + 1) % slides.length;
+        slides[index].classList.add('active');
+    }, 3000);function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerHTML = '❤';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.top = '100vh';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+}
+setInterval(createHeart, 300);
+
+</script>
+</body>
+</html>
